@@ -70,6 +70,8 @@ pvalue <- pnorm(q = -zscore, mean = 0, sd = 1) * 2
 
 #Compute Confidence Interval : 
 ci <- c(d_hat - moe, d_hat + moe)
+ci_lower <- d_hat - qnorm(0.975) * se_pool
+ci_upper <- d_hat - qnorm(0.975) * se_pool
 #Intervals for Variant  A: 
 x_hat_a <- conversions_A / visitorA
 se_hat_a <- sqrt(x_hat_a * (1-x_hat_a) / visitorA)
