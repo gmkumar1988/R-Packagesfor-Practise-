@@ -1,6 +1,6 @@
-file.choose()
 
-install.packages("tidyverse")
+
+#install.packages("tidyverse")
 library(tidyverse)
 
 getwd()
