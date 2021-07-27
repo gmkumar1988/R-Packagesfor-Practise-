@@ -1,36 +1,32 @@
-install.packages("tm")  # for text mining
-install.packages("SnowballC") # for text stemming
-install.packages("wordcloud") # word-cloud generator 
-install.packages("RColorBrewer") # color palettes
-install.packages("syuzhet") # for sentiment analysis
-install.packages("ggplot2") # for plotting values 
+---
+title: "Amazon Word Cloud Sentiment Analysis"
+author: "Mahesh Gurumoorthi"
+source data : "Kaggle"
+date: "27/07/2021"
+output: html_document
+---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Sentimentatl Analytics (Most Frequent Words Used in Amazon Portal)
+
+This is a Markdown document about Sentiment Analytics - India Amazon Product Search
+
+```{r cars}
+summary(cars)
 library(tm)
 library(SnowballC)
 library(wordcloud)
 library(RColorBrewer)
 library(syuzhet)
 library(ggplot2)
-
 #Loading the dataset:
-file_text <- readLines(file.choose())
+file_text <- readLines("/Users/maheshgurumoorthi/Dropbox/amazon_vfl_reviews.csv")
 #Load the data Corpus :
 file_doc <- Corpus(VectorSource(file_text))
-
-
-# for(i in seq(file_doc))   { 
-#   docs[[i]] <- gsub("/", " ", docs[[i]])   
-#   docs[[i]] <- gsub("@", " ", docs[[i]])   
-#   docs[[i]] <- gsub("\|", " ", docs[[i]])
-# }
-
-
-
-inspect(file_doc)
-# inspect(TextDoc)
-
-
-toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+# inspect(file_doc)
 
 #Replacing "/", "@" and "|" with space
 toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
@@ -61,11 +57,22 @@ dtm_m <- as.matrix(dtm)
 dtm_v <- sort(rowSums(dtm_m),decreasing=TRUE)
 dtm_d <- data.frame(word = names(dtm_v),freq=dtm_v)
 
-head(dtm_d,10)
+# head(dtm_d,10)
 
 set.seed(15092)
 
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
 wordcloud(words = dtm_d$word,freq = dtm_d$freq,title = "Most Frequent Words used in Amazon India Portal",
           min.freq = 1, max.words = 1000,
           random.order = FALSE,rot.per = 0.5,
           colors = brewer.pal(8,"Dark2"))
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
