@@ -93,10 +93,14 @@ india_pyramid %>%
 ###GGAnimate
 
 install.packages("gganimate")
+install.packages("gifski")
+install.packages("png")
 
+library(png)
+library(gifski)
 library(gganimate)
 
-ggplot(data = india_pyramid, 
+g <- ggplot(data = india_pyramid, 
        mapping = aes(x = pop, y = age, fill = fct_rev(education))) +
   geom_col() +
   geom_vline(xintercept = 0, colour = "black") +
@@ -110,6 +114,9 @@ ggplot(data = india_pyramid,
         strip.text.x = element_text(margin = margin(b = 0, t = 0))) +
   transition_time(time = year) +
   labs(x = "Number of Population in Millions", y = "Age Details", 
-       title = 'SSP2 World Population {round(frame_time)}')
+       title = 'India Population {round(frame_time)}')
+#Render gganimate using gifski:
+animate(g, renderer = gifski_renderer())
+
 
   
