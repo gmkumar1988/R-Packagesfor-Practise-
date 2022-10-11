@@ -49,3 +49,5 @@ aggr = aggregate(KRCDF[,-c(1,2,8)], list(KRCDF$clusters), mean)
 clus.profile <- data.frame(Cluster = aggr[,1],
                            Freq = as.vector(table(KRCDF$clusters)),
                            aggr[,-1])
+
+View(clus.profile)
