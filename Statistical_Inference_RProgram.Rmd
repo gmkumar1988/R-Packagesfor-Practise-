@@ -1,0 +1,18 @@
+
+
+###Using rexp, we will create 40 random exponential distributions using lambda = 0.2, take the mean of this 40 draws and create a data vector with 1500 of these means. Than analyse the distribution of the value of the means. We are searchind the kind of distribution they will be disposed
+#Load libraries to help 
+library(ggplot2)
+#Set parameters
+ECHO=TRUE
+set.seed(2222)
+lambda=0.2
+exponentials=40
+#Create the values
+simulationMeans = NULL
+for (i in 1:1500)simulationMeans = c(simulationMeans,mean(rexp(exponentials, lambda)))
+summary(simulationMeans)
+
+
+
+
