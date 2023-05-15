@@ -11,7 +11,7 @@ exponentials=40
 #Create the values
 simulationMeans = NULL
 for (i in 1:1500)simulationMeans = c(simulationMeans,mean(rexp(exponentials, lambda)))
-summary(simulationMeans)
+### summary(simulationMeans)
 
 
 
