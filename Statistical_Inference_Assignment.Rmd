@@ -1,0 +1,78 @@
+---
+title: "Statistical Inference Assignment"
+author: "Mahesh Gurumoorthi"
+date: "2023-05-17"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Import Libraries:
+
+#Load libraries to help 
+library(ggplot2)
+<!-- #Set parameters -->
+<!-- ECHO=TRUE -->
+<!-- set.seed(2222) -->
+<!-- lambda=0.2 -->
+<!-- exponentials=40 -->
+<!-- #Create the values -->
+
+```{r cars}
+ECHO=TRUE
+set.seed(2222)
+lambda=0.2
+exponentials=40
+simulationMeans = NULL
+for (i in 1:1500)simulationMeans = c(simulationMeans,mean(rexp(exponentials, lambda)))
+
+summary(simulationMeans)
+mean(simulationMeans)
+#calculate the theoretical Mean
+theoreticalmean<-lambda^-1
+theoreticalmean
+
+abs(mean(simulationMeans)-theoreticalmean)
+
+#Sample variance
+simulationvar<-var(simulationMeans)
+simulationvar
+
+#Theoretical Variance
+Theoreticalvar<-(lambda * sqrt(exponentials))^-2
+Theoreticalvar
+
+# Comparison 
+simulationvar-Theoreticalvar
+
+```
+
+## Including Plots
+
+<!-- You can also embed plots, for example: -->
+
+```{r pressure, echo=FALSE}
+#Lets plot in a histogram 
+hist (simulationMeans, col="#B1EFFF", main="Sample Mean versus Theoretical Mean", breaks=20)
+#and draw the two lines for the Means
+abline(v=mean(simulationMeans), lwd="2", col="#149403")
+abline(v=mean (theoreticalmean), lwd="2", col="#d90b23")
+text (6.5, 150, paste("Actual mean (green)= ", round (mean(simulationMeans),3), "\nTheoretical mean (red)= ",round(theoreticalmean,3)), col="#888888")
+
+#Lets draw the histogram for the simulation
+hist(simulationMeans, prob=TRUE, col="#FFF4A1", main=" Distribution of the Means", breaks=20)
+text (6.4, 0.55, paste("red: density function for the simulation\nblue:  the theorical normal distribution"), col="#888888")
+#create a random values for normal distribution with theoretical values
+x<-rnorm(10000,mean=5, sd=0.625)
+#and compare with the density function that disperses the mass of the simulationMeans over a grid of 512 points using Fourier transform in a gaussian curve as default to smooth the line
+lines(density(simulationMeans), lwd="3", col="#E6652E")
+lines(density(x), lwd="3", col="#4444AB")
+
+```
+
+
+<!-- Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. -->
