@@ -41,6 +41,6 @@ tdm <- as.matrix(tdm)
 
 tdm[1:10, 1:20]
 
-w<- rowSums(tdm)
+w<- rowSums(tdm, na.rm = na.rm)
 
 w<- subset(w,w>=25)
