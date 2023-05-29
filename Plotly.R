@@ -8,6 +8,10 @@ library(tidyverse)
 library(dplyr)
 data("EuStockMarkets")
 
+# n<- data("EuStockMarkets")
+
+# colnames(n)
+
 stocks <- as.data.frame(EuStockMarkets) %>%
   gather(index, price) %>%
   mutate(time = rep(time(EuStockMarkets),4))
