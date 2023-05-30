@@ -21,6 +21,23 @@ stocks <- as.data.frame(EuStockMarkets) %>%
 
 plot_ly(stocks, x = stocks$time, y = stocks$price, color = stocks$index)
 
+install.packages("quantmod_0.4-14.tar.gz", repos = NULL, type = "source")
+
+startDate <- as.Date(2019-04-01)
+endDate <- as.Date(2020-04-24)
+
+getSymbols("SPY",  from = startDate , to = endDate)
+getSymbols("SPY",  from = startDate , to = endDate, src = "google")
+
+###########
+install.packages("quantmod")
+library(quantmod)
+update.packages("quantmod")
+install.packages("TTR")
+library(TTR)
+getSymbols('INTC')
+df <- getSymbols('INTC', src = 'yahoo', auto.assign = FALSE)
+
 
 # plot_ly(stocks, x = stocks$time, y = stocks$price, color = index)
 
