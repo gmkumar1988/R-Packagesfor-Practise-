@@ -1,3 +1,5 @@
+
+date()
 library(leaflet)
 
 upicon <- makeIcon(
