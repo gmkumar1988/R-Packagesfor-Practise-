@@ -1,0 +1,64 @@
+---
+title: "Leaflet"
+author: "Mahesh Gurumoorthi"
+date: "2023-06-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+<!-- This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. -->
+
+<!-- When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this: -->
+
+```{r cars}
+library(leaflet)
+library(MASS)
+
+upicon <- makeIcon(
+  iconUrl =  "https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/University_of_The_Philippines_seal.svg/640px-University_of_The_Philippines_seal.svg.png",
+  iconWidth = 50, iconHeight = 50,
+  iconAnchorX = 50*215/230/2, iconAnchorY = 25
+)
+ADMU_icon <- makeIcon(
+  iconUrl = "https://upload.wikimedia.org/wikipedia/en/thumb/6/6c/Ateneo_de_Manila_University_seal.svg/1200px-Ateneo_de_Manila_University_seal.svg.png",
+  iconWidth = 50, iconHeight = 50,
+  iconAnchorX = 50*215/230/2, iconAnchorY = 25
+)
+
+DLSU_icon <- makeIcon(
+  iconUrl = "https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/De_La_Salle_University_Seal.svg/1200px-De_La_Salle_University_Seal.svg.png",
+  iconWidth = 50, iconHeight = 50,
+  iconAnchorX = 50*215/230/2, iconAnchorY = 25
+)
+
+UST_icon <- makeIcon(
+  iconUrl = "https://preview.redd.it/ss0xjc3h60f41.png?auto=webp&s=8afbd67ecf61c818f4db572bb99a9ca48ec3f9d4",
+  iconWidth = 50, iconHeight = 55,
+  iconAnchorX = 50*215/230/2, iconAnchorY = 25
+)
+
+
+top_univ_ph <- leaflet() %>%
+  addTiles() %>%
+  addMarkers(lat=14.6539, lng=121.0685, popup="University of the Philippines", icon = upicon) %>%
+  addMarkers(lat = 14.6395, lng = 121.0781, popup = "Ateneo de Manila University", icon = ADMU_icon) %>%
+  addMarkers(lat = 14.5647, lng = 120.9932, popup = "De La Salle University", icon = DLSU_icon) %>% 
+  addMarkers(lat = 14.6095, lng = 120.9898, popup = "University of Santo Tomas", icon = UST_icon)
+
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+top_univ_ph
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
