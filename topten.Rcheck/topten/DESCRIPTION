@@ -1,0 +1,12 @@
+Package: topten
+Type: Package
+Title: Top Ten Feature Predictions
+Version: 0.1.0
+Author: Mahesh G
+Maintainer: Mahesh G <gmkumar_1988@yahoo.com>
+Description: Functions and Predicting Models from selecting the top ten predictors in pre-defined dataset
+License: GPL-3
+Encoding: UTF-8
+NeedsCompilation: no
+Packaged: 2023-06-09 23:04:12 UTC; maheshg
+Built: R 4.3.0; ; 2023-06-09 23:04:15 UTC; unix
