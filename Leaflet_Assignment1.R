@@ -2,6 +2,11 @@
 date()
 library(leaflet)
 
+# devtools::install_version("MASS", "7.3-51.1")
+
+install.packages("MASS")
+update.packages("MASS")
+
 upicon <- makeIcon(
   iconUrl =  "https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/University_of_The_Philippines_seal.svg/640px-University_of_The_Philippines_seal.svg.png",
   iconWidth = 50, iconHeight = 50,

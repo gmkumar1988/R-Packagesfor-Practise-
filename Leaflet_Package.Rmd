@@ -17,7 +17,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r cars}
 library(leaflet)
-library(MASS)
+# devtools::install_version("MASS", "7.3-51.1")
+# library(MASS)
 
 upicon <- makeIcon(
   iconUrl =  "https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/University_of_The_Philippines_seal.svg/640px-University_of_The_Philippines_seal.svg.png",
