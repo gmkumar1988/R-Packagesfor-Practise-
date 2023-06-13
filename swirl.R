@@ -1,0 +1,11 @@
+install.packages("swirlify")
+library(swirlify)
+getwd()
+new_lesson("Lesson1","My first course")
+wq_message()
+wq_command()
+add_to_manifest()
+test_lesson()
+
+demo_lesson()
+get_current_lesson()

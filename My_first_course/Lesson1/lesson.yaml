@@ -1,0 +1,16 @@
+- Class: meta
+  Course: My first course
+  Lesson: Lesson1
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.5
+
+- Class: text
+  Output: put your text output here
+
+- Class: cmd_question
+  Output: Add 2 and 3 using plus operator
+  CorrectAnswer: 2 + 3
+  AnswerTests: omnitest(correctExpr='2 + 3')
+  Hint: Addition of 2 and 3 
