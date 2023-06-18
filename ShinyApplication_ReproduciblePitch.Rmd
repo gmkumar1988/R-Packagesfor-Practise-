@@ -9,25 +9,34 @@ output: slidy_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## R Markdown
+## Overview
 
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This application was designed for Developing Data Products - Shiny Application Reproducible Pitch.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+This part of the assignment to create a Shiny application  and reproducible pitch can be found here using inbuilt dataset mtcars:
 
-## Slide with Bullets
+## Takeawway
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+- Motor Trend US Magazine collected data (11 variable) on 32 automobiles
+- By using this application module, the cost of gasoline traveling some distance in one of the 32
 
-## Slide with R Output
+## Data and Variables 
+mpg = Miles/ galon  
+cyl = Number of cylinders used
+disp = Displacement
+hp = Gross Horsepower 
+drat = Rear Axle Ration
+wt = Weight
+am = Transmission Mode (Automatic or Manual)
+
+##Glimse of data output:
 
 ```{r cars, echo = TRUE}
-summary(cars)
+head(mtcars) 
+
 ```
 
-## Slide with Plot
+<!-- ## Slide with Plot -->
 
 ```{r pressure}
 plot(pressure)
