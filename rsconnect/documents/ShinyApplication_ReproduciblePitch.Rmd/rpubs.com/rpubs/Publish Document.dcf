@@ -1,0 +1,11 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/1055846/86669029dbe74fb0ae9212965d7451e6
+bundleId: https://api.rpubs.com/api/v1/document/1055846/86669029dbe74fb0ae9212965d7451e6
+url: http://rpubs.com/gmkumar1988/1055846
+when: 1687132607.43554
+lastSyncTime: 1687132607.43556

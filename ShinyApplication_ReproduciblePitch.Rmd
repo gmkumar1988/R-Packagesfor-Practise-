@@ -13,32 +13,59 @@ knitr::opts_chunk$set(echo = FALSE)
 
 This application was designed for Developing Data Products - Shiny Application Reproducible Pitch.
 
-This part of the assignment to create a Shiny application  and reproducible pitch can be found here using inbuilt dataset mtcars:
+This part of the assignment to create a Shiny application  and reproducible pitch can be found here.
 
-## Takeawway
+## Steps to Perform
 
-- Motor Trend US Magazine collected data (11 variable) on 32 automobiles
-- By using this application module, the cost of gasoline traveling some distance in one of the 32
+1. Write a shiny application with associated supporting documentation. The documentation should be thought of as whatever a user will need to get started using your application.
+2. Deploy the application on Rstudio's shiny server
+3. Share the application link by pasting it into the provided text box
+4. Share your server.R and ui.R code on github
 
-## Data and Variables 
-mpg = Miles/ galon  
-cyl = Number of cylinders used
-disp = Displacement
-hp = Gross Horsepower 
-drat = Rear Axle Ration
-wt = Weight
-am = Transmission Mode (Automatic or Manual)
+## How to use the application
 
-##Glimse of data output:
+It is a simple application where you can choose the temperature you want to see and you can also see the average wind speed and average pressure. They are measurements in the State of Chihuahua, Mexico in the month of January of the year 2022.
 
-```{r cars, echo = TRUE}
-head(mtcars) 
+The application is running [here](https://manuelmv17.shinyapps.io/Shiny_Application/?_ga=2.155327294.427908903.1645661995-1239653917.1645661995).
 
+The data used, ui.R and Server.R code are in my [github repository](https://github.com/ManuelMV17/Shiny-Application-and-Reproducible-Pitch).
+
+
+## Monthly Average Temperature
+
+```{r}
+library(readxl)
+library(plotly)
+
+Libro_1 <- read_excel("/Users/maheshg/Dropbox/git repos/R-Packagesfor-Practise-/Libro 1.xlsx", 
+                      col_types = c("numeric", "numeric", "numeric", 
+                                    "numeric", "numeric", "numeric"))
 ```
 
-<!-- ## Slide with Plot -->
+```{r, cache=TRUE, fig.align='center'}
+library(plotly)
 
-```{r pressure}
-plot(pressure)
+fig <- plot_ly(Libro_1, type = "scatter", mode = "lines") %>%
+    add_trace(x = ~Dia, y = ~Monthly_Average_Temperature, name = "(Day, Temperature)") %>%
+    layout(showlegend = F)
+options(warn = -1)
+
+fig <- fig %>%
+    layout(
+        
+        xaxis = list(zerolinecolor = '#ffff',
+                     
+                     zerolinewidth = 2,
+                     
+                     gridcolor = 'ffff'),
+        
+        yaxis = list(zerolinecolor = '#ffff',
+                     
+                     zerolinewidth = 2,
+                     
+                     gridcolor = 'ffff'),
+        
+        plot_bgcolor='#e5ecf6', width = 900)
+
+fig
 ```
-
