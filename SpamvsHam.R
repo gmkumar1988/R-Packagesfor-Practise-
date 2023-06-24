@@ -19,3 +19,14 @@ set.seed(333)
 smallSpam <- spam[sample(dim(spam)[1], size = 10),]
 spamlable <- (smallSpam$type=="spam") * 1 + 1
 plot(smallSpam$capitalAve, col = spamlable)
+
+
+###Rule 2 to small spam
+rule2 <- function(x) {
+  prediction <- rep(NA, length(x))
+  prediction [x >2.4] <- "Spam"
+  prediction [x <= 2.4] <- "Non Spam"
+  return(prediction)
+  
+}
+table(rule2(smallSpam$capitalAve), smallSpam$type)
