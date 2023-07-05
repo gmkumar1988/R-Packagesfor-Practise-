@@ -47,3 +47,17 @@ sapply(folds,length)
 
 folds[[1]] [1:10]
 
+
+####Time slices 
+set.seed(32323)
+tme <- 1:1000
+folds <- createTimeSlices(y = tme, initialWindow = 20, horizon = 10)
+
+names(folds)
+folds$train[1]
+folds$test[1]
+folds$train[2]
+folds$test[2]
+folds$train[3]
+folds$test[3]
+
