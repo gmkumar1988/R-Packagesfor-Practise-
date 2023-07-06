@@ -1,0 +1,90 @@
+---
+title: "SmokeDetection_MLModel1"
+author: "Mahesh Gurumoorthi"
+date: "2023-07-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# knitr::opts_chunk$set(echo = TRUE)
+library(caret)
+library(kernlab)
+# install.packages("rpart.plot")
+library(rpart.plot)
+# install.packages("corrplot")
+library(corrplot)
+# install.packages("ggcorrplot")
+library(ggcorrplot)
+# file.choose()
+# smoke = read.csv("/Users/maheshg/Dropbox/Sample Datasets Kaggle/smoke_detection_iot.csv", 
+#          header = TRUE)
+install.packages("psych")
+library(psych)
+library(dplyr)
+library(tidyverse)
+# install.packages("corrplot")
+library(corrplot)
+
+
+smoke = read.csv("/Users/maheshg/Dropbox/Sample Datasets Kaggle/smoke_detection_iot.csv", 
+         header = TRUE)
+smoke %>%
+  select(
+    temp_c = `Temperature.C.`,
+    humidity = `Humidity...`,
+    tvoc = `TVOC.ppb.`,
+    co2 = `eCO2.ppm.`,
+    h2 = `Raw.H2`,
+    ethanol = `Raw.Ethanol`,
+    pressure = `Pressure.hPa.`,
+    pm1 = PM1.0,
+    pm2_5 = PM2.5,
+    fire_alarm = `Fire.Alarm`
+    
+  ) %>%
+  mutate(
+    fire_alarm = factor(fire_alarm, levels = c(1,0), labels = c("yes","no"))
+  ) %>%
+  glimpse() -> df_data
+```
+
+## R Markdown
+
+In this example, we are finding the correlation of Smoke detection dataset from  classification model in R Programming language.
+
+<!-- This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. -->
+
+<!-- When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this: -->
+
+```
+<!-- smoke = read.csv("/Users/maheshg/Dropbox/Sample Datasets Kaggle/smoke_detection_iot.csv",  -->
+<!--          header = TRUE) -->
+<!-- smoke %>% -->
+<!--   select( -->
+<!--     temp_c = `Temperature.C.`, -->
+<!--     humidity = `Humidity...`, -->
+<!--     tvoc = `TVOC.ppb.`, -->
+<!--     co2 = `eCO2.ppm.`, -->
+<!--     h2 = `Raw.H2`, -->
+<!--     ethanol = `Raw.Ethanol`, -->
+<!--     pressure = `Pressure.hPa.`, -->
+<!--     pm1 = PM1.0, -->
+<!--     pm2_5 = PM2.5, -->
+<!--     fire_alarm = `Fire.Alarm` -->
+
+<!--   ) %>% -->
+<!--   mutate( -->
+<!--     fire_alarm = factor(fire_alarm, levels = c(1,0), labels = c("yes","no")) -->
+<!--   ) %>% -->
+<!--   glimpse() -> df_data -->
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```
+corrplot(corr = cor(df_data[,1:7]))
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

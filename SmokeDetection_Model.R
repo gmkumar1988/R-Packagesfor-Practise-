@@ -9,7 +9,6 @@ library(ggcorrplot)
 # file.choose()
 smoke = read.csv("/Users/maheshg/Dropbox/Sample Datasets Kaggle/smoke_detection_iot.csv", 
          header = TRUE)
-
 install.packages("psych")
 library(psych)
 View(smoke)
@@ -37,7 +36,9 @@ smoke %>%
   glimpse() -> df_data
 
 # pairs(df_data)
-# corPlot(df_data$temp_c, cex = 1.2)
+corPlot(df_data$temp_c, cex = 1.2)
 cor(df_data)
-ggplot(df_data, aes(x = df_data$temp_c, y = df_data$pressure)) + geom_point() + 
-  labels(x = "Temperature" , y = "Pressure")
+ggplot(df_data, aes(x = df_data$temp_c, y = df_data$pressure)) + geom_point() 
+install.packages("corrplot")
+library(corrplot)
+corrplot(corr = cor(df_data[,1:7]))
