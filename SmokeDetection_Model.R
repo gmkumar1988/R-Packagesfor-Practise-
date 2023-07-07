@@ -42,3 +42,6 @@ ggplot(df_data, aes(x = df_data$temp_c, y = df_data$pressure)) + geom_point()
 install.packages("corrplot")
 library(corrplot)
 corrplot(corr = cor(df_data[,1:7]))
+
+
+summary(df_data)

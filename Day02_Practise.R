@@ -22,3 +22,23 @@ modelfit
 
 ###Train options 
 args(train.default)
+
+############Plotting Predictors ########
+install.packages("ISLR")
+library(ISLR)
+library(ggplot2)
+library(caret)
+data("Wage")
+summary(Wage)
+
+intrain <- createDataPartition(y = Wage$age, 
+                               p = 0.7, list = FALSE)
+training <- Wage[intrain,]
+testing <- Wage[-intrain,]
+dim(training)
+dim(testing)
+featurePlot(x = training[,c("age","education","jobclass")],
+            y = training$wage,
+            plot = "pairs")
+
+qplot(age,wage, data = training)
