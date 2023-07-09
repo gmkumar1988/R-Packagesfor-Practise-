@@ -37,3 +37,47 @@ summary(lml)
 plot(trainfaith$waiting, trainfaith$eruptions, pch = 19, col="blue",
      xlab = "Waiting", ylab = "Eruptions")
 lines(trainfaith$waiting, lml$fitted.values, lwd = 3)
+
+###Estimate Eruption Duration###
+ed = coef(lml)[1] + coef(lml)[2] *80
+
+newdata <- data.frame(waiting = 90)
+
+predict(lml,newdata)
+
+par(mfrow = c(1,2))
+plot(trainfaith$waiting, trainfaith$eruptions, pch = 19, col = "blue",
+     xlab = "waiting", ylab = "duration")
+lines(trainfaith$waiting, predict(lml), lwd = 3)
+plot(testfaith$waiting, testfaith$eruptions, pch = "blue",
+     xlab = "waiting", ylab = "duration")
+lines(testfaith$waiting, predict(lml, newdata = testfaith), lwd = 3)
+
+
+###Regression with Multiple covariates###
+library(ISLR)
+library(ggplot2)
+library(caret)
+data("Wage")
+View(Wage)
+Wage1 <- subset(Wage, select = -c(logwage))
+View(Wage1)
+summary(Wage1)
+intrain <- createDataPartition( y= Wage1$age, 
+                                p = 0.7, list = FALSE)
+training <- Wage1[intrain,]
+testing <- Wage1[-intrain,]
+dim(training); dim(testing)
+
+###Feature Plot###
+featurePlot(x = training[,c("age","education","jobclass")],
+            y = training$wage,
+            plot = "pairs")
+qplot(age, wage, color = jobclass, data = training)
+
+qplot(age, wage, color = education, data = training)
+
+modfit <- train(wage ~ age + jobclass + education, 
+                method = "lm", data = training)
+finmod <- modfit$finalModel
+print(finmod)
