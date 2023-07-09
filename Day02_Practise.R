@@ -42,3 +42,6 @@ featurePlot(x = training[,c("age","education","jobclass")],
             plot = "pairs")
 
 qplot(age,wage, data = training)
+qplot(age, wage, colour = jobclass, data = training)
+qq <- qplot(age,wage, colour = education, data = training)
+qq + geom_smooth(method = 'lm',formula = y ~x)
