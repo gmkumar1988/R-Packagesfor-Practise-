@@ -80,4 +80,5 @@ qplot(age, wage, color = education, data = training)
 modfit <- train(wage ~ age + jobclass + education, 
                 method = "lm", data = training)
 finmod <- modfit$finalModel
-print(finmod)
+print(modfit)
+
