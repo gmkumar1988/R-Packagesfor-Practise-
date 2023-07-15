@@ -70,3 +70,18 @@ testing$predRight <- pred == testing$Species
 table(pred,testing$Species)
 
 qplot(Petal.Width, Petal.Length, data = testing, colour = predRight,main = "New Data Predictions ")
+
+###Boosting###
+library(ISLR)
+data("Wage")
+library(caret)
+library(ggplot2)
+Wage <- subset(Wage, select= -c(logwage))
+intraing <- createDataPartition(y = Wage$wage,
+                                p = 0.7, list = FALSE)
+training <- Wage[intraing,]
+testing <- Wage[-intraing,]
+
+modfit <- train(wage ~ ., method = "gbm", data = training, verbose = FALSE)
+print(modfit)
+qplot(predict(modfit, testing), wage, data = testing)
