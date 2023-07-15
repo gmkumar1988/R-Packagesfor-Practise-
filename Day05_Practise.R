@@ -115,3 +115,11 @@ mod2 <- train (wage ~ ., method = "rf",
 pred1 <- predict(mod1, testing)
 pred2 <- predict(mod2, testing)
 qplot(pred1,pred2, colour = wage, data = testing)
+
+
+###Forecast###
+install.packages("quantmod")
+library(quantmod)
+from.dat <- as.Date("01/01/08", format = "%m/%d/%y")
+to.dat <- as.Date("01/01/13", formt = "%m/%d/%y")
+getSymbols("MSFT",src = "yahoo", from = from.dat, to = to.dat)
