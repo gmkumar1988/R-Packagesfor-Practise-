@@ -64,3 +64,9 @@ p <- qplot(training$Petal.Width, training$Petal.Length, colour = training$Specie
            data = training)
 p + geom_point(aes(x = Petal.Width, y = Petal.Length, col = Species
                    ), size = 5, shape = 4, data = irisP)
+
+pred <- predict(modfit, testing)
+testing$predRight <- pred == testing$Species
+table(pred,testing$Species)
+
+qplot(Petal.Width, Petal.Length, data = testing, colour = predRight,main = "New Data Predictions ")
