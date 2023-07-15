@@ -85,3 +85,33 @@ testing <- Wage[-intraing,]
 modfit <- train(wage ~ ., method = "gbm", data = training, verbose = FALSE)
 print(modfit)
 qplot(predict(modfit, testing), wage, data = testing)
+
+###Combine Predictors###
+library(ISLR)
+data("Wage")
+library(ggplot2)
+library(caret)
+Wage <- subset(Wage, select = -c(logwage))
+
+#Creating data partition 
+inbuild <- createDataPartition(y = Wage$wage, 
+                               p = 0.7, list = FALSE)
+
+validation <- Wage[-inbuild,]
+buildata <- Wage[inbuild,]
+intrain <- createDataPartition(y = buildata$wage, 
+                               p = 0.7, list = FALSE)
+training <- buildata[intrain,]
+testing <- buildata[-intrain,]
+
+dim(training)
+dim(testing)
+dim(validation)
+
+mod1 <- train(wage ~. , method = "glm", data = training)
+mod2 <- train (wage ~ ., method = "rf",
+               data = training, 
+               trControl = trainControl(method = "cv"), number = 3)
+pred1 <- predict(mod1, testing)
+pred2 <- predict(mod2, testing)
+qplot(pred1,pred2, colour = wage, data = testing)
