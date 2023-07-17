@@ -82,5 +82,18 @@ conf_matrix_GBM
 ###Random Forest###
 set.seed(1967)
 ctrl_RF <- trainControl(method = "repeatedcv", number = 5, repeats = 2)
-fit_RF <- train(training_set$classe ~ ., data = training_set, method = "rf",
-                trControl = ctrl_RF, verbose = FALSE)
+fit_RF  <- train(classe ~ ., data = training_set, method = "rf",
+                 trControl = ctrl_RF, verbose = FALSE)
+fit_RF$finalModel
+
+predict_RF <- predict(fit_RF, newdata = testing_set)
+conf_matrix_RF <- confusionMatrix(table(predict_RF,testing_set$classe))
+conf_matrix_RF
+
+###Evaluate Models### -- Random forests has more accuracy
+plot(fit_RF)
+
+print(fit_RF$bestTune)
+
+###Predictions with this model
+cat("Predictions", paste(predict(fit_RF, testing_data)))
