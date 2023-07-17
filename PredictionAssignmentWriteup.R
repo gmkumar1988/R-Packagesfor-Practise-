@@ -67,3 +67,20 @@ conf_matrix_DT
 plot(conf_matrix_DT$table, col = conf_matrix_DT$byClass, 
      main = paste("Decision Tree Model: Predictive Accuracy =",
                   round(conf_matrix_DT$overall['Accuracy'], 4)))
+
+###Gradient Boosted Method###
+set.seed(1967)
+ctrl_GBM <- trainControl(method = "repeatedcv", number = 5, repeats = 2)
+fit_GBM  <- train(classe ~ ., data = training_set, method = "gbm",
+                  trControl = ctrl_GBM, verbose = FALSE)
+fit_GBM$finalModel
+
+predict_GBM <- predict(fit_GBM, newdata = testing_set)
+conf_matrix_GBM <- confusionMatrix(table(predict_GBM, testing_set$classe))
+conf_matrix_GBM
+
+###Random Forest###
+set.seed(1967)
+ctrl_RF <- trainControl(method = "repeatedcv", number = 5, repeats = 2)
+fit_RF <- train(training_set$classe ~ ., data = training_set, method = "rf",
+                trControl = ctrl_RF, verbose = FALSE)
