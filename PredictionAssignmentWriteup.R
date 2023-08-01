@@ -15,7 +15,7 @@ library(plotly)
 library(gbm)
 
 training_data <- read.csv("/Users/maheshg/Downloads/pml-training.csv", header = TRUE)
-testing_data <- read.csv("/Users/maheshg/Downloads/pml-testing.csv", header = TRUE)
+# testing_data <- read.csv("/Users/maheshg/Downloads/pml-testing.csv", header = TRUE)
 
 dim(training_data)
 dim(testing_data)
