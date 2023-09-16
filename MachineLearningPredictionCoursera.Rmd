@@ -1,0 +1,67 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(rattle)
+library(ggplot2)
+library(caret)
+library(rpart)
+library(rpart.plot)
+library(corrplot)
+library(corrplot)
+library(RColorBrewer)
+library(lattice)
+library(randomForest)
+library(plotly)
+library(gbm)
+set.seed(222)
+
+url_train <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
+url_quiz  <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
+data_train <- read.csv(url(url_train), strip.white = TRUE, na.strings = c("NA",""))
+data_quiz  <- read.csv(url(url_quiz),  strip.white = TRUE, na.strings = c("NA",""))
+
+dim(data_train)
+dim(data_quiz)
+
+in_train <- createDataPartition(data_train$classe, p = 0.75, list = FALSE)
+train_set <- data_train[in_train,]
+test_set <- data_train[-in_train,]
+dim(train_set)
+
+dim(test_set)
+nzv_var <- nearZeroVar(train_set)
+train_set <- train_set[,-nzv_var]
+test_set <- test_set[,-nzv_var]
+dim(train_set)
+dim(test_set)
+
+na_var<- sapply(train_set,function(x) mean(is.na(x))) > 0.95
+train_set <- train_set[,na_var ==FALSE]
+test_set <- test_set[,na_var ==FALSE]
+dim(train_set)
+dim(test_set)
+train_set <- train_set[,-(1:5)]
+test_set <- test_set [,-(1:5)]
+
+dim(train_set)
+dim(test_set)
+
+corr_matrix <- cor(train_set[,-54])
+corrplot(corr_matrix,order = "FPC",method = "circle",type = "lower",
+         t1.cex = 0.6, t1.col = rgb(0,0,0))
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
