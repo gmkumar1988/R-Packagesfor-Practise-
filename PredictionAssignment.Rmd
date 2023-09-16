@@ -25,7 +25,6 @@ library(caret)
 library(rpart)
 library(rpart.plot)
 library(corrplot)
-library(corrplot)
 library(RColorBrewer)
 library(lattice)
 library(randomForest)
@@ -71,11 +70,51 @@ corr_matrix <- cor(train_set[,-54])
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
+```{r pressure, echo=TRUE, message=TRUE, warning=TRUE, paged.print=TRUE}
 
-corr_matrix <- cor(train_set[,-54])
-corrplot(corr_matrix,order = "FPC",method = "circle",type = "lower",
-         t1.cex = 0.6, t1.col = rgb(0,0,0))
+corr_matrix <- cor(train_set[ , -54])
+corrplot(corr_matrix, order = "FPC", method = "circle", type = "lower",
+         tl.cex = 0.6, tl.col = rgb(0, 0, 0))
+
+
+###Decision Tree Model:
+set.seed(2222)
+fit_decision_tree <- rpart(classe ~ ., data = train_set, method="class")
+fancyRpartPlot(fit_decision_tree)
+
+predict_decision_tree <- predict(fit_decision_tree, newdata = test_set, type="class")
+conf_matrix_decision_tree <- confusionMatrix(predict_decision_tree, factor(test_set$classe))
+conf_matrix_decision_tree
+
+
+plot(conf_matrix_decision_tree$table, col = conf_matrix_decision_tree$byClass,
+     main = paste("Decision Tree Model: Predictive Accuracy =",
+                  round(conf_matrix_decision_tree$overall['Accuracy'], 4)))
+
+
+set.seed(2222)
+ctrl_GBM <- trainControl(method = "repeatedcv", number = 5, repeats = 2)
+fit_GBM  <- train(classe ~ ., data = train_set, method = "gbm",
+                  trControl = ctrl_GBM, verbose = FALSE)
+fit_GBM$finalModel
+
+
+predict_GBM <- predict(fit_GBM, newdata = test_set)
+conf_matrix_GBM <- confusionMatrix(predict_GBM, factor(test_set$classe))
+conf_matrix_GBM
+
+
+set.seed(2222)
+ctrl_RF <- trainControl(method = "repeatedcv", number = 5, repeats = 2)
+fit_RF  <- train(classe ~ ., data = train_set, method = "rf",
+                  trControl = ctrl_RF, verbose = FALSE)
+fit_RF$finalModel
+
+
+predict_quiz <- as.data.frame(predict(fit_RF, newdata = data_quiz))
+predict_quiz
+
+
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
