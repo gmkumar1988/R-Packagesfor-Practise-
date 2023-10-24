@@ -1,0 +1,17 @@
+# install.packages("forecast")
+library(forecast)
+# install.packages("dygraphs")
+library(dygraphs)
+laborforce = na.omit(laborforce)
+View(laborforce)
+rownames(laborforce)
+laborforce <- laborforce[,-c(1,2)]
+laborforce <- t(laborforce)
+# dim(laborforce)
+colnames(laborforce) <- c('Year','Emp Rate')
+dim(laborforce)
+str(laborforce)
+plot(laborforce)
+plot.ts(laborforce)
+# holttrend =holt(laborforce, h = 5)
+
