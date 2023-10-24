@@ -11,9 +11,12 @@ laborforce <- t(laborforce)
 # dim(laborforce)
 colnames(laborforce) <- c('Year','Emp Rate')
 dim(laborforce)
-str(laborforce)
-plot(df, xlab = "Year", ylab = "Employment Rate", 
-     main = "Spain Labor Force Employment Rate Till 2020")
-plot.ts(laborforce)
-# holttrend =holt(laborforce, h = 5)
+# str(laborforce)
+# plot(df, xlab = "Year", ylab = "Employment Rate", 
+#      main = "Spain Labor Force Employment Rate Till 2020")
+# plot.ts(laborforce)
+# # holttrend =holt(laborforce, h = 5)
+plot(laborforce, xlab = "Year", ylab = "Employment Rate",
+     main = "Spain Labor Force Employment Rate till 2020")
+
 
