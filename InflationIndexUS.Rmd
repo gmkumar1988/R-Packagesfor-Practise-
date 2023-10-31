@@ -1,0 +1,44 @@
+---
+title: "Inflation Index"
+author: "Mahesh Gurumoorthi"
+date: "2023-10-31"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(forecast)
+library(dplyr)
+library(tidyverse)
+inflation <- read.csv("/Users/maheshg/Dropbox/Sample Datasets Kaggle/CPIAUCSL.csv",
+                      header = TRUE)
+str(inflation)
+colnames(inflation)
+inflation$DATE <- as.Date(inflation$DATE)
+inflation$DATE <- na.omit(inflation$DATE)
+inflation$CPIAUCSL <- na.omit(inflation$CPIAUCSL)
+
+inflation <- inflation %>%
+  filter(DATE >= '2020-02-03')
+
+
+```
+
+## R Markdown
+
+This is an R Markdown document for capturing US Inflation Data Trend starting from 2021 till 2023.
+
+
+```
+summary(inflation)
+```
+
+## Trend Analysis
+
+
+```{r pressure, echo=FALSE}
+plot(inflation$DATE,inflation$CPIAUCSL,
+     main = "US Inflation Trend Analysis from 2021 till 2023",
+     xlab = "Year", ylab = "CPI (Consumer Price Index)")
+
+```
+

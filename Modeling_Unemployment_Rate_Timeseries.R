@@ -19,7 +19,3 @@ dim(laborforce)
 plot(laborforce, xlab = "Year", ylab = "Employment Rate",
      main = "Spain Labor Force Employment Rate till 2020")
 
-
-
-
-
