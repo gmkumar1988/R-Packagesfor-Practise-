@@ -19,25 +19,25 @@ inflation$DATE <- na.omit(inflation$DATE)
 inflation$CPIAUCSL <- na.omit(inflation$CPIAUCSL)
 view(inflation)
 
-inflation <- ts(inflation, start = '2021-01-01', frequency = 12)
+# inflation <- ts(inflation, start = '2021-01-01', frequency = 12)
 
 plot(inflation$DATE,inflation$CPIAUCSL,
      main = "US Inflation Trend Analysis from 2021 till 2023",
      xlab = "Year", ylab = "CPI (Consumer Price Index)")
 
+scatter.smooth(x = inflation$DATE, y = inflation$CPIAUCSL, xlab = "Year",
+               ylab = "CPI (Consumer Price Index)")
+
+
+?scatter.smooth
+
 tsmod <- stlm(inflation,modelfunction = ar)
 
 library(xts)
-y <- xts(NULL, order.by = seq.Date(from = as.Date("2023-01-01"), by = "months", length.out = 43))
+y <- xts(NULL, order.by = seq.Date(from = as.Date("2021-01-01"), by = "months", length.out = 43))
 
-
-y <- xts(x = inflation$DATE, order.by = seq.Date(from = as.Date("2020-03-01",
-                                                                         by = "days",
-                                                                         length.out = 44)))
-rm(inflation$DATE)
-inflation <- inflation [,-1]
 head(inflation)
-
+as.data.frame(inflation,y)
 # plot(stlm(inflation,method = "ets"))
 # plot.ts(inflation)
 # plot(inflation)
