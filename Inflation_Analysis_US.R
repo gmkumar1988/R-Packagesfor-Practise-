@@ -1,6 +1,8 @@
 library(forecast)
 library(dplyr)
 library(tidyverse)
+library(ggplot2)
+library(fpp2)
 inflation <- read.csv("/Users/maheshg/Dropbox/Sample Datasets Kaggle/CPIAUCSL.csv",
                       header = TRUE)
 # View(inflation)
@@ -23,15 +25,26 @@ plot(inflation$DATE,inflation$CPIAUCSL,
      main = "US Inflation Trend Analysis from 2021 till 2023",
      xlab = "Year", ylab = "CPI (Consumer Price Index)")
 
-plot(stlm(inflation,method = "ets"))
-plot.ts(inflation)
-str(inflation)
-plot(inflation)
-plot.ts(inflation)
-plot(stl(inflation, s.window = 7))
-plot.ts(stl(inflation,s.window = 7))
+tsmod <- stlm(inflation,modelfunction = ar)
 
-#stl forecasting 
+library(xts)
+y <- xts(NULL, order.by = seq.Date(from = as.Date("2023-01-01"), by = "months", length.out = 43))
+
+
+y <- xts(x = inflation$DATE, order.by = seq.Date(from = as.Date("2020-03-01",
+                                                                         by = "days",
+                                                                         length.out = 44)))
+rm(inflation$DATE)
+inflation <- inflation [,-1]
+head(inflation)
+
+# plot(stlm(inflation,method = "ets"))
+# plot.ts(inflation)
+# plot(inflation)
+# plot.ts(inflation)
+# plot(stl(inflation, s.window = 7))
+# plot.ts(stl(inflation,s.window = 7))
+
 
 plot(stlf(inflation,method = "ets"))
 auto.arima(inflation,stepwise = F,
