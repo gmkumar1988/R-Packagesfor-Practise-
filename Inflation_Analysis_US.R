@@ -50,3 +50,16 @@ plot(stlf(inflation,method = "ets"))
 auto.arima(inflation,stepwise = F,
            approximation = F,
            trace = T)
+
+###Yahoo Finance 
+install.packages("quantmod")
+library(quantmod)
+microsoft_dif <- getSymbols('MSFT',
+                        src = 'yahoo',
+                        auto.assign = FALSE)
+head(apple_dif)
+chartSeries(microsoft_dif,name = 'MSFT',subset = 'last 6 months',
+            theme = chartTheme("white"))
+
+chartSeries(apple_dif,name = 'AAPL',subset = 'last 6 months',
+            theme = chartTheme("white"))
