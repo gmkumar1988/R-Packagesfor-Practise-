@@ -18,4 +18,17 @@ if (x > 0 ) {
 }
 # install.packages("tidyverse")
 library(tidyverse)
+#####tooth growth analysis: 
+data("ToothGrowth")
+View(ToothGrowth)
+library(dplyr)
+filtered_tg <- filter(ToothGrowth,dose == 0.5)
+View(filtered_tg)
+arrange(filtered_tg,len)
+arrange(filter(ToothGrowth,dose == 0.5),len)
+filtered_toothgrowth <- ToothGrowth %>%
+  filter(dose == 0.5) %>%
+  group_by(supp) %>%
+  arrange(len) %>%
+  summarise(mean_length = mean(len, na.rm = T),.groups = "drop" )
 
