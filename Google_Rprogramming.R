@@ -72,3 +72,11 @@ penguins |> group_by(species,island) |> drop_na() |>
 
 penguins |> 
   arrange(bill_length_mm)
+
+
+penguins |> 
+  filter(island != "Torgersen")
+
+ggplot(penguins) +
+  geom_point(mapping = aes(x = flipper_length_mm,
+                           y = body_mass_g))
