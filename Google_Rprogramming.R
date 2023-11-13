@@ -80,3 +80,25 @@ penguins |>
 ggplot(penguins) +
   geom_point(mapping = aes(x = flipper_length_mm,
                            y = body_mass_g))
+
+library(palmerpenguins)
+library(ggplot2)
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = penguins$flipper_length_mm,
+                           y= penguins$body_mass_g,
+                           shape= species,
+                           color=species,
+                           size = species),
+             color = "purple") 
+  
+ggplot(data = penguins) +
+  geom_point(mapping = aes(x = penguins$flipper_length_mm,
+                           y = penguins$body_mass_g)) +
+  geom_smooth(mapping = aes(x = penguins$flipper_length_mm,
+                            y = penguins$body_mass_g))
+
+ggplot(data= penguins) +
+  geom_smooth(mapping = aes(x = penguins$flipper_length_mm,
+                            y = penguins$body_mass_g,
+                            linetype = species))
+
