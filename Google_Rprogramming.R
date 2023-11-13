@@ -41,3 +41,34 @@ head(diamonds)
 
 str(diamonds)
 mutate(diamonds, carot_2 = diamonds$carat * 100)
+
+###cleaning
+install.packages("here")
+library(here)
+install.packages("skimr")
+library(skimr)
+install.packages("janitor")
+library(janitor)
+library(dplyr)
+library(palmerpenguins)
+skim_without_charts(penguins)
+glimpse(penguins)
+head(penguins)
+penguins |> select(-species)
+penguins |> select(-species) |> 
+  rename(island_new = island)
+rename_with(penguins,toupper)
+clean_names(penguins)
+penguins |> arrange(-bill_length_mm)
+penguins2 <- penguins |> arrange(-bill_length_mm)
+view(penguins2)
+penguins |> group_by(island) |> drop_na() |> 
+  summarise(mean_bill_length_mm = mean(bill_length_mm))
+penguins |> group_by(island) |> drop_na() |> 
+  summarise(max_bill_length = max(bill_length_mm))
+penguins |> group_by(species,island) |> drop_na() |> 
+  summarise(max_bl = max(bill_length_mm), mean_bl = mean(bill_depth_mm)) |> 
+  arrange(-mean_bl)
+
+penguins |> 
+  arrange(bill_length_mm)
