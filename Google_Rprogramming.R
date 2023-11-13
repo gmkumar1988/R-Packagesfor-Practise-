@@ -31,4 +31,13 @@ filtered_toothgrowth <- ToothGrowth %>%
   group_by(supp) %>%
   arrange(len) %>%
   summarise(mean_length = mean(len, na.rm = T),.groups = "drop" )
+#### tidyverse
 
+install.packages("tidyverse")
+library(tidyverse)
+data("diamonds")
+View(diamonds)
+head(diamonds)
+
+str(diamonds)
+mutate(diamonds, carot_2 = diamonds$carat * 100)
