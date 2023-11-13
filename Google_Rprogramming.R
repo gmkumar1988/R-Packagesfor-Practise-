@@ -96,9 +96,9 @@ ggplot(data = penguins) +
                            y = penguins$body_mass_g)) +
   geom_smooth(mapping = aes(x = penguins$flipper_length_mm,
                             y = penguins$body_mass_g))
-
 ggplot(data= penguins) +
-  geom_smooth(mapping = aes(x = penguins$flipper_length_mm,
+  geom_point(mapping = aes(x = penguins$flipper_length_mm,
                             y = penguins$body_mass_g,
-                            linetype = species))
+                           color = species)) +
+  facet_grid(sex~species)
 

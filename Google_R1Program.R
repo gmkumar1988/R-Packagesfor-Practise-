@@ -2,7 +2,25 @@ library(here)
 library(skimr)
 library(janitor)
 library(tidyverse)
+library(ggplot2)
 bookings_df <- read_csv("/Users/maheshg/Dropbox/Sample Datasets Kaggle/GL0bk8O2Sja9G5PDtko2uQ_31e445d7ca64417eb45aeaa08ec90bf1_hotel_bookings.csv")
+ggplot(data = bookings_df) +
+  geom_point(mapping = aes(x = bookings_df$lead_time,
+                           y = bookings_df$children))
+ggplot(data = bookings_df) +
+  geom_point(mapping = aes(x = bookings_df$hotel,y = bookings_df$children,
+                           fill = bookings_df$market_segment))
+
+library(tidyverse)
+online_city_hotels <- filter(bookings_df,
+                             (bookings_df$hotel == "City Hotel" &
+                                bookings_df$market_segment == "Online TA"))
+
+View(online_city_hotels)
+online_city_hotels2 <- bookings_df |> 
+  filter(bookings_df$hotel == "City Hotel" & 
+           bookings_df$market_segment == "Online TA")
+
 head(bookings_df)
 str(bookings_df)
 glimpse(bookings_df)
@@ -49,3 +67,5 @@ library(SimDesign)
 actual_temp <- c (68.3,70,72.4,71,67,70)
 predicted_temp <- c(67.9,69,71.5,70,67,69)
 bias(actual_temp,predicted_temp)
+
+
