@@ -20,6 +20,7 @@ View(online_city_hotels)
 online_city_hotels2 <- bookings_df |> 
   filter(bookings_df$hotel == "City Hotel" & 
            bookings_df$market_segment == "Online TA")
+View(online_city_hotels2)
 
 head(bookings_df)
 str(bookings_df)
@@ -68,4 +69,6 @@ actual_temp <- c (68.3,70,72.4,71,67,70)
 predicted_temp <- c(67.9,69,71.5,70,67,69)
 bias(actual_temp,predicted_temp)
 
+x <- data("diamonds")
 
+diamonds$cut
