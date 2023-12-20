@@ -54,6 +54,9 @@ library(palmerpenguins)
 skim_without_charts(penguins)
 glimpse(penguins)
 head(penguins)
+
+library(dplyr)
+
 penguins |> select(-species)
 penguins |> select(-species) |> 
   rename(island_new = island)
@@ -101,4 +104,5 @@ ggplot(data= penguins) +
                             y = penguins$body_mass_g,
                            color = species)) +
   facet_grid(sex~species)
+
 
