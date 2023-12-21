@@ -23,7 +23,8 @@ is.na(customer_personality$Income)
 customer_personality |>
   dplyr::mutate(customer_personality = replace_na(customer_personality$Income, 0000))
 
-customer_personality[is.na(customer_personality), ]<- 0000
+customer_personality[is.na(customer_personality$Income), ]<- 0000
+is.na(customer_personality$Income)
 
 # ?mutate
 str(customer_personality)
@@ -31,6 +32,6 @@ glimpse(customer_personality)
 class(customer_personality)
 
 
-customer_personality[customer_personality$Income <= 2000] <- "Simple Income"
+customer_personality[customer_personality$Income <= 20000] <- "Simple Income"
 customer_personality[customer_personality$Income > 2100 & customer_personality$Income <= 5000] <- "Medium Income"
 customer_personality[customer_personality$Income > 5000] <- "High Income"
