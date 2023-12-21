@@ -54,3 +54,15 @@ customer_behavior_train_down <- downSample(x = customer_behavior_train |>
                                            y = customer_behavior_train$Purchased,
                                            yname = "Purchased")
 prop.table(table(customer_behavior_train_down$Purchased))
+
+###Naive Bayes Model 
+#model fitting using Naive Bayes Model : 
+customer_behaviour_model_nb <- naiveBayes(formula = customer_behavior_train_down$Purchased~., data = customer_behavior_train_down)
+
+customer_behaviour_model_nb
+###Model Evaluation/ Prediction 
+customer_prediction_naive <- predict(customer_behaviour_model_nb, newdata = customer_behviour_test, type = "class")
+###Evaluation of model using confusion matrix : 
+confusionMatrix(data = customer_prediction_naive, reference = customer_behviour_test$Purchased,
+                positive = "1")
+
