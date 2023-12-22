@@ -66,3 +66,16 @@ customer_prediction_naive <- predict(customer_behaviour_model_nb, newdata = cust
 confusionMatrix(data = customer_prediction_naive, reference = customer_behviour_test$Purchased,
                 positive = "1")
 
+###Decision Tree Model 
+###Model fitting
+customer_behavior_model_decisiontree <- ctree(formula = customer_behavior_train_down$Purchased~.,
+                                              data = customer_behavior_train_down)
+###Plotting the decision tree: 
+plot(customer_behavior_model_decisiontree,type = "simple")
+
+###Model Evaluation: 
+customer_behavior_prediction_decisiontree <- predict(customer_behavior_model_decisiontree,
+                                                     newdata = customer_behviour_test,type= "response")
+###Evaluation of model using confusion matrix : 
+confusionMatrix(data = customer_behavior_prediction_decisiontree,reference = customer_behviour_test$Purchased,
+                positive = '1')
