@@ -34,7 +34,7 @@ customer_behavior_clean <- customer_behavior |>
          Purchased = as.factor(Purchased)) |> 
   select(-User.ID)
 
-###Checking Missing Values 
+###Checking Missing Values in the customer behaviour dataset:
 colSums(is.na(customer_behavior_clean))
 
 ###Splitting the value into two - train and test data [Cross Validation]:
