@@ -34,7 +34,7 @@ customer_behavior_clean <- customer_behavior |>
          Purchased = as.factor(Purchased)) |> 
   select(-User.ID)
 
-###Checking Missing Values 
+###Checking Missing Values in the customer behaviour dataset:
 colSums(is.na(customer_behavior_clean))
 
 ###Splitting the value into two - train and test data [Cross Validation]:
@@ -63,7 +63,7 @@ customer_behaviour_model_nb
 ###Model Evaluation/ Prediction 
 customer_prediction_naive <- predict(customer_behaviour_model_nb, newdata = customer_behviour_test, type = "class")
 ###Evaluation of model using confusion matrix : 
-confusionMatrix(data = customer_prediction_naive, reference = customer_behviour_test$Purchased,
+confusionMatrix(data = customer_prediction_naive, reference = customer_behviour_test$Purchased, # nolint
                 positive = "1")
 
 ###Decision Tree Model 
@@ -79,3 +79,28 @@ customer_behavior_prediction_decisiontree <- predict(customer_behavior_model_dec
 ###Evaluation of model using confusion matrix : 
 confusionMatrix(data = customer_behavior_prediction_decisiontree,reference = customer_behviour_test$Purchased,
                 positive = '1')
+###Random Forest 
+###Model fitting using random forest : 
+#Creation of RDS file : 
+set.seed(1234)
+ctrl <- trainControl(method = "repeatedcv",
+                    number = 3,
+                    repeats = 3)
+
+customer_behavior_model_randomforest <- train(Purchased ~.,
+data = customer_behavior_train,
+method = "rf",
+trControl = ctrl)
+saveRDS(customer_behavior_model_randomforest,"model_rf.RDS")
+customer_behavior_model_randomforest <- read_rds("model_rf.RDS")
+
+###Inspecting the model: 
+customer_behavior_model_randomforest
+
+###Predicting the model to the dataset
+customer_behavior_prediction_randomforest <- predict(customer_behavior_model_randomforest,
+newdata = customer_behviour_test, type = "raw")
+
+###Model Evaluation: 
+confusionMatrix(data= customer_behavior_model_randomforest, reference = customer_behviour_test$Purchased,
+positive = "1")
