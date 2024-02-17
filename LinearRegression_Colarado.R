@@ -28,7 +28,7 @@ View(PimaIndiansDiabetes2)
 ??set.seed()
 library(dplyr)
 
-
+###Remove the na values from the dataset before moving to EDA : 
 PimaIndiansDiabetes2 <-  na.omit(PimaIndiansDiabetes2)
 ###Creating Partitions and defining the samples from the dataset : 
 training_samples <- PimaIndiansDiabetes2$diabetes %>%
@@ -68,4 +68,19 @@ trainingdata_samples %>%
     y = "Probability of being Diabetes"
   )
 
+###Multiple Logistic Regression: 
+model <- glm(diabetes ~ glucose + mass + pregnant, 
+             data = trainingdata_samples, family = binomial)
 
+summary(model) $coef
+coef(model)
+
+model <- glm(diabetes ~ glucose + mass + pregnant + mass + pedigree, 
+             data = trainingdata_samples, family = binomial)
+
+probability_2 <- model %>% predict(testigdata_sample, type = "response")
+contrasts(testigdata_sample$diabetes)
+
+predicted.classes <- ifelse(probability_2 > 0.5, "pos","neg")
+head(predicted.classes)
+mean(predicted.classes == testigdata_sample$diabetes)
