@@ -33,3 +33,28 @@ ext_tracks <- read_fwf(ext_tracks_file,
                        fwf_widths(ext_tracks_widths, ext_tracks_colnames),
                        na = "-99")
 ext_tracks[1:3, 1:9]
+
+
+
+install.packages("httr")
+library(httr)
+install.packages("dplyr")
+library(dplyr)
+meso_url <- "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py/"
+
+
+denver <- GET(url = meso_url,
+              query = list(station = "DEN",
+                           data = "sped",
+                           year1 = "2016",
+                           month1 = "6",
+                           day1 = "1",
+                           year2 = "2016",
+                           month2 = "6",
+                           day2 = "30",
+                           tz = "America/Denver",
+                           format = "comma")) 
+  # content() %>% 
+  # read_csv(skip = 5, na = "M") 
+
+head(denver)
