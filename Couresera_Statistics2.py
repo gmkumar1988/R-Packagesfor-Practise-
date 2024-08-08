@@ -43,3 +43,4 @@ dataprofession['Z_Score'] = stats.zscore(dataprofession['Salary'])
 # print(dataprofession['Z_Score'])
 # print(dataprofession.describe())
 print(dataprofession[(dataprofession['Z_Score'] >3 |(dataprofession['Z_Score'] <-3))])
+
