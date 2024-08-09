@@ -1,0 +1,7 @@
+SELECT TOP (1000) [GLAcctID]
+      ,[AlternateKey]
+      ,[GLAcctName]
+      ,[Category]
+      ,[Subcategory]
+      ,[Statement]
+  FROM [dbo].[dimGLAcct]
