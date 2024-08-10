@@ -42,3 +42,25 @@ education_districtwise_list <- for (i in 1:10) {
   append(education_districtwise_list, education_enrollment_country2)
 }
 education_districtwise_df <- data.frame(education_districtwise_list)
+
+
+education_districtwise <- education_districtwise %>% drop_na()
+# is.na(education_districtwise)
+
+
+###Simulating Random Sampling from the dataset:
+set.seed(31208)
+new_sample_data <- sample(education_districtwise, size = 50, 
+                          replace =  TRUE, prob = NULL)
+
+View(new_sample_data)
+
+###Computing the sample Mean : 
+new_estimate1 <- mean(new_sample_data$Gross_Tertiary_Education_Enrollment)
+print(new_estimate1)
+
+set.seed(56810)
+new_sample_data <- sample(education_districtwise, size = 50, 
+                          replace =  TRUE, prob = NULL)
+new_estimate2 <- mean(new_sample_data$Gross_Tertiary_Education_Enrollment)
+print(new_estimate2)
