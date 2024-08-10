@@ -10,7 +10,8 @@ SELECT TOP (1000) [FactID]
   FROM [dbo].[FactPrices_Daily]
 
 
-  select top(1000)
-        max([DateTime]) as MaxDate,
-        min([DateTime]) as MinDate
-        from [dbo].[FactAttributes_Intraday];
+--   select top(1000)
+--         max([DateTime]) as MaxDate,
+--         min([DateTime]) as MinDate
+--         from [dbo].[FactAttributes_Intraday];
+
