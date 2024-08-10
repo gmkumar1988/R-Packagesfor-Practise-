@@ -1,3 +1,10 @@
+CREATE VIEW vw.GLTrans 
+
+--This view gives the detailed information about GL Transaction 
+
+AS 
+
+
 SELECT 
 
     --Fact GL Train
@@ -37,3 +44,5 @@ FROM FactGLTran as GL
     INNER JOIN dimGLAcct as ACC on GL.GLAcctID = ACC.GLAcctID
     INNER JOIN dimStore as STOR on GL.StoreID = STOR.StoreID
     INNER JOIN dimRegion as REG on STOR.RegionID = REG.RegionID
+
+GO
