@@ -40,3 +40,23 @@ qplot (data = df, x = Youth_15_24_Literacy_Rate_Male,
        ylab = "Youth Literacy Rate of Female",
        main = "Literacy Rate Ratio of Youth Age 15 to 24 across the Globe")
 
+library(ggplot2)
+##Qplot with cylinder: 
+qplot (data = df, x = Youth_15_24_Literacy_Rate_Male, 
+       y= Youth_15_24_Literacy_Rate_Female, colour = cyl, 
+       shape = cyl)
+
+##Violin Plot : 
+qplot (data = df, x = Youth_15_24_Literacy_Rate_Male, 
+       y= Youth_15_24_Literacy_Rate_Female, geom = "violin",
+       xlab = "Youth Literacy Rate of Male",
+       ylab = "Youth Literacy Rate of Female",
+       main = "Literacy Rate Ratio of Youth Age 15 to 24 across the Globe")
+
+
+#Dot Plot : 
+qplot (data = df, x = Youth_15_24_Literacy_Rate_Male, 
+       y= Youth_15_24_Literacy_Rate_Female, geom = "density",
+       xlab = "Youth Literacy Rate of Male",
+       ylab = "Youth Literacy Rate of Female",
+       main = "Literacy Rate Ratio of Youth Age 15 to 24 across the Globe")
