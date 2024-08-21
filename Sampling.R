@@ -55,12 +55,37 @@ new_sample_data <- sample(education_districtwise, size = 50,
 
 View(new_sample_data)
 
+
+
 ###Computing the sample Mean : 
 new_estimate1 <- mean(new_sample_data$Gross_Tertiary_Education_Enrollment)
 print(new_estimate1)
+
+# set.seed(56810)
+# new_sample_data <- sample(education_districtwise, size = 50, 
+#                           replace =  TRUE, prob = NULL)
+# new_estimate2 <- mean(new_sample_data$Gross_Tertiary_Education_Enrollment)
+# print(new_estimate2)
+
+###Steps for contructing a confidence interval
+#1. Identify sample statistics
+#2. Choose a confidence level
+#3. Find a marging of error
+#4. Calculate the interval
 
 set.seed(56810)
 new_sample_data <- sample(education_districtwise, size = 50, 
                           replace =  TRUE, prob = NULL)
 new_estimate2 <- mean(new_sample_data$Gross_Tertiary_Education_Enrollment)
-print(new_estimate2)
+
+
+new_estimate2 <- mean(new_sample_data$Gross_Tertiary_Education_Enrollment)
+
+estimatated_standard_error <- sd(new_sample_data$Gross_Tertiary_Education_Enrollment) /
+  sqrt(length(new_sample_data[0]))
+
+#Fit a confidence intrval with 95% 
+model <- lm(new_sample_data$OOSR_Primary_Age_Male ~ new_sample_data$OOSR_Primary_Age_Female,
+            data = new_sample_data)
+
+confint(model)
