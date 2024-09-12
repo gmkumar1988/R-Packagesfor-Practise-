@@ -25,7 +25,7 @@ str(carprice_data)
 
 
 filtered_data <- carprice_data %>%
-  filter(carprice_data$Prod..year >=2000) %>% 
+  filter(carprice_data$Prod..year > 2000) %>% 
   select(carprice_data$Price, carprice_data$Prod..year)
 
 View (filtered_data)
