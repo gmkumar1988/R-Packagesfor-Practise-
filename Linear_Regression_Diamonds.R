@@ -32,6 +32,7 @@ data(diamond)
 y <- diamond$price 
 x <- diamond$carat
 n <- length(y)
+# print(n)
 fit <- lm(y ~ x)
 e <- resid(fit)
 yhat <- predict(fit)
@@ -49,5 +50,41 @@ abline(h= 0, lwd = 2)
 for(i in 1 : n)
   lines(c(x[i],x[i]), c(e[i],0), col = 'red',lwd = 2)
 
+x = runif(100, -3, 3)
+y = x + sin(x) + rnorm(100, sd = 0.2)
+library(ggplot2)
+g = ggplot(data.frame(x = x, y = y), 
+           aes(x = x, y = y))
+g = g + geom_smooth(method = 'lm', colour = 'black')
+g = g + geom_point(size = 7 , colour = 'black', alpha = 0.4)
+g = g + geom_point(size = 5, colour = 'red', alpha = 0.4)
+print(g)
+
+install.packages("gganimate")
+library(gganimate)
+library(ggplot2)
+###Herecomes animation 
+ggplot(data = diamond,aes(price, carat)) +
+  geom_boxplot() +
+  transition_states(
+    price,
+    transition_length = 2,
+    state_length = 1
+  ) +
+  enter_fade() +
+  exit_shrink() +
+  ease_aes('sine-in-out')
 
 
+library(UsingR)
+data("diamonds")
+y <- diamond$price 
+x <- diamond$carat
+n <- length(y)
+beta1 <- cor(y,x) * sd(y) /sd(x)
+beta0 <- mean(y) - beta1 * mean(x)
+e <- y - beta0 - beta1 * x
+sigma <- sqrt(sum(e^2) / (n-2))
+ssx <- sum((x - mean(x))^2)
+
+           
