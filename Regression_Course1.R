@@ -15,4 +15,7 @@ g = g + geom_abline(intercept = 0, slope = rho, size = 2)
 g = g + geom_abline(intercept = 0, slope = 1/ rho , size = 2)
 print(g)
 
+###Predicting the price of the diamond
+newx <- c(0.16,0.27,0.34)
+coef(fit1) + coef(fit2) * newx
 
