@@ -7,9 +7,36 @@ library(ggplot2)
 library(dplyr)
 library(broom)
 library(ggpubr)
+library(gganimate)
 
 carprice_data = read.csv("/Users/maheshg/Dropbox/Sample Datasets Kaggle/car_price_prediction.csv")
 
+head(carprice_data, n= 10)
+ggplot(carprice_data, 
+       aes(Prod..year, Price, size = pop, colour = country)) + 
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  # scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~Manufacturer) +
+  labs(title = 'Year: {frame_time}', x = 'Production Year', y = 'Price') +
+  transition_time(year) +
+  ease_aes('linear')
+
+
+###Example gganimate: 
+library(gapminder)
+head(gapminder)
+ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  # scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  # Here comes the gganimate specific bits
+  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
+  transition_time(year) +
+  ease_aes('linear')
 summary(carprice_data)
 hist(carprice_data$Price)
 
