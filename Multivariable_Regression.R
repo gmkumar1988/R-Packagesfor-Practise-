@@ -26,3 +26,9 @@ library(GGally)
 summary(lm(Fertility ~ Agriculture, data = swiss))$coefficients
 
 help("wrap", package = "GGally")
+
+###Petrol Dataset: 
+petrol <- read.csv("/Users/maheshg/Library/CloudStorage/OneDrive-Microsoft365/Sample Datasets Kaggle/petrol_consumption.csv")
+head(petrol)
+cor(petrol)
+summary(petrol)
