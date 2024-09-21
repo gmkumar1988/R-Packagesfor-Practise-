@@ -28,3 +28,6 @@ plot(insurance_age_bmi)
 insurance_graph <- ggplot(insurance_data, aes (x = bmi, y = age)) + 
   geom_point()
 print(insurance_graph)
+# 
+# install.packages("rgl")
+# library(rgl)
