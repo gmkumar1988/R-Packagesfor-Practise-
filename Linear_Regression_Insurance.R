@@ -13,6 +13,16 @@ library(ggpubr)
 insurance_data <- read.csv("/Users/maheshg/Dropbox/Sample Datasets Kaggle/insurance.csv")
 head(insurance_data)
 summary(insurance_data)
+library(gapminder)
+head(gapminder)
+library(dplyr)
+
+insurance <- insurance_data %>%
+  ggplot() +
+  geom_point(aes(x = bmi, y = charges, col = sex,size = charges), alpha = 0.8) + 
+  theme_minimal() +
+  theme(legend.position = "bottom") + guides(size = "none") + 
+  labs(x = "BMI", y = "charges", col = "")
 
 
 hist(insurance_data$bmi)
