@@ -24,6 +24,10 @@ insurance <- insurance_data %>%
   theme(legend.position = "bottom") + guides(size = "none") + 
   labs(x = "BMI", y = "charges", col = "")
 
+insurance
+
+insurance + 
+  transition_time(charges)
 
 hist(insurance_data$bmi)
 plot(bmi ~ age, data = insurance_data)
