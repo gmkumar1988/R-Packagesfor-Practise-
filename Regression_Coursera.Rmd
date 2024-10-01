@@ -1,0 +1,41 @@
+---
+title: "Regression_Model_Coursera"
+author: "Mahesh Gurumoorthi"
+date: "2024-10-01"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+
+```{r cars}
+library(ggplot2)
+data(mtcars)
+mtcars$vs <- factor(mtcars$vs)
+mtcars$am.label <- factor(mtcars$am, labels=c("Automatic","Manual")) # 0=automatic, 1=manual
+mtcars$gear <- factor(mtcars$gear)
+mtcars$carb <- factor(mtcars$carb)
+head(mtcars)
+
+T_variance_analysis <- aov(mpg ~ ., data = mtcars)
+summary(T_variance_analysis)
+T_multivar <- lm(mpg ~ cyl + disp + wt + am, data = mtcars)
+summary(T_multivar)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+boxplot(mpg ~ am.label, data = mtcars, col = (c("red","blue")), ylab = "Miles Per Gallon", xlab = "Transmission
+Type")
+```
