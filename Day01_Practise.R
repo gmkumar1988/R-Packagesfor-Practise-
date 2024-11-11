@@ -61,3 +61,20 @@ folds$test[2]
 folds$train[3]
 folds$test[3]
 
+
+####Subsampling dataset: 
+library(kernlab)
+data(spam)
+###Performing subsampling: 
+set.seed(3435)
+trainIndicater = rbinom(4601, size = 1, prob = 0.5)
+table(trainIndicater)
+
+trainSpam = spam[trainIndicater ==1,]
+testSpam = spam[trainIndicater ==0,]
+names(trainSpam)
+head(trainSpam)
+table(trainSpam$type)
+
+plot(trainSpam$capitalAve ~ trainSpam$type)
+plot(log10(trainSpam$capitalAve + 1) ~ trainSpam$type)
