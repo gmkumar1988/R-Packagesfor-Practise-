@@ -125,3 +125,8 @@ plot(loan_data_index$Age.in.years, loan_data_index$Credit.amount,
      col = "blue",
      pch = 19)
 
+
+### Splitting the training and testing data from the loan 
+set.seed(567)
+library(caret)
+###Storing row numbers for the training dataset
