@@ -55,3 +55,73 @@ plot(loan$Age.in.years, loan$Credit.amount,
      ylab = "Credit Amount",
      col = "blue",
      pch = 19)
+
+### Replace and identify the missing data 
+str(loan$Credit.amount)
+summary(loan$Credit.amount)
+
+### Getting index of missing values from the credit amount 
+index_missing <- which(is.na(loan$Credit.amount))
+print(index_missing)
+
+### Remove the observations with missing values from the credit amount attribute : 
+loan_data_index <- loan[-index_missing, ]
+print(loan_data_index)
+
+is.na(loan_data_index$Credit.amount)
+
+# Check if the 'Credit.amount' column has any missing values
+if (length(loan$Credit.amount) > 0 && any(!is.na(loan$Credit.amount))) {
+  min_val <- min(loan$Credit.amount, na.rm = TRUE)
+  max_val <- max(loan$Credit.amount, na.rm = TRUE)
+} else {
+  min_val <- NA
+  max_val <- NA
+}
+
+#Suppress the warnings 
+suppressWarnings({
+  loan_data_index$Credit.amount <- ifelse(is.na(loan_data_index$Credit.amount), 
+                                          min_val, 
+                                          loan_data_index$Credit.amount)
+})
+
+safe_min <- function(loan_creditamount) {
+  if (length(loan$Credit.amount) > 0 && any(!is.na(loan$Credit.amount))) {
+    return(min(loan$Credit.amount, na.rm = TRUE))
+  } else {
+    return(NA)
+  }
+}
+
+safe_max <- function(loan_creditamount) {
+  if (length(loan$Credit.amount) > 0 && any(!is.na(loan$Credit.amount))) {
+    return(max(loan$Credit.amount, na.rm = TRUE))
+  } else {
+    return(NA)
+  }
+}
+
+plot(loan$Credit.amount, 
+     main = "Credit Amount Distribution",
+     xlab = "Credit Amount",
+     ylab = "Frequency",
+     col = "lightblue",
+     border = "black")
+
+# Plot the scatter plot of Age vs Credit Amount after removing missing values
+plot(loan_data_index$Age.in.years, loan_data_index$Credit.amount,
+     main = "Scatter Plot of Age vs Credit Amount (Filtered)",
+     xlab = "Age in Years",
+     ylab = "Credit Amount",
+     col = "blue",
+     pch = 19)
+
+
+plot(loan_data_index$Age.in.years, loan_data_index$Credit.amount,
+     main = "Scatter Plot of Age vs Credit Amount (No Missing Values)",
+     xlab = "Age in Years",
+     ylab = "Credit Amount",
+     col = "blue",
+     pch = 19)
+
